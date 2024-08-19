@@ -14,6 +14,8 @@ const INITIAL_INVESTMENT: InvestmentData = {
 function App() {
     const [investment, setInvestment] = useState<InvestmentData>(INITIAL_INVESTMENT)
 
+    const inputIsValid: boolean = (investment.duration > 0)
+
     function handleChange(inputIdentifier: string, newValue: string) {
         setInvestment((prevUserInput: InvestmentData) => {
             return {
@@ -27,7 +29,7 @@ function App() {
         <>
             <Header />
             <UserInput investmentData={investment} onChangeInput={handleChange} />
-            <Result investment={investment} />
+            {inputIsValid ? <Result investment={investment}/> : <p className="center">Please enter a valid duration greater then 0</p>}
         </>
     )
 }
